@@ -6,7 +6,7 @@ public class DinnerConstructor {
     public static final HashMap<String, ArrayList<String>> MENU = new HashMap<>();
 
     // Метод проверяет имя блюда на наличие в меню. Если блюдо есть, добавить его второй раз не получится.
-    boolean dishIsAbsent(String nameOfDish) {
+    boolean checkDishOnAbsent(String nameOfDish) {
         boolean dishIsAbsent = true;
         for (String type : MENU.keySet()) {
             for (String dish : MENU.get(type)) {
@@ -20,7 +20,7 @@ public class DinnerConstructor {
     }
 
     // Метод проверяет наличие типа блюда в меню. С помощью проверки данным методом реализована логика в putDishToMenu()
-    boolean checkType(String type) {
+    boolean checkTypeOnExist(String type) {
         boolean typeIsExist = MENU.containsKey(type) ? true : false;
         return typeIsExist;
     }
@@ -39,7 +39,7 @@ public class DinnerConstructor {
         if (typeOfDish.equals("Первое") || typeOfDish.equals("Суп")) {
             typeOfDish = "Суп";
         }
-        boolean typeIsInMenu = checkType(typeOfDish) && dishIsAbsent(nameOfDish);
+        boolean typeIsInMenu = checkTypeOnExist(typeOfDish) && checkDishOnAbsent(nameOfDish);
         switch (typeIsInMenu) {
             case true -> addingDish(typeOfDish, nameOfDish, MENU.get(typeOfDish));
             case false -> addingDish(typeOfDish, nameOfDish, new ArrayList<>());
