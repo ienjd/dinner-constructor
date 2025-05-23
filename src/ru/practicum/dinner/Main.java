@@ -15,15 +15,12 @@ public class Main {
             printMenu();
             String command = scanner.nextLine();
 
-            switch (command) {
-                case "1":
-                    addNewDish();
-                    break;
-                case "2":
-                    generateDishCombo();
-                    break;
-                case "3":
-                    return;
+            switch (command) { // спасибо за идею со switch через лямбда-выражение, он читабельнее и лаконичнее (⌒‿⌒)
+                case "1" -> addNewDish();
+
+                case "2" -> generateDishCombo();
+
+                case "3" -> {return;}
             }
         }
     }
@@ -41,7 +38,8 @@ public class Main {
         System.out.println("Введите название блюда:");
         String dishName = scanner.nextLine();
 
-        // добавьте новое блюдо
+        dc.putDishToMenu(dishType, dishName);
+
     }
 
     private static void generateDishCombo() {
