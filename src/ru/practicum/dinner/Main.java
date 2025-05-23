@@ -39,7 +39,6 @@ public class Main {
         String dishName = scanner.nextLine();
 
         dc.putDishToMenu(dishType, dishName);
-
     }
 
     private static void generateDishCombo() {

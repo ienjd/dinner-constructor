@@ -12,7 +12,7 @@ public class DinnerConstructor {
         boolean dishIsAbsent = true;
         for (String type : MENU.keySet()) {
             for (String dish : MENU.get(type)) {
-                if (nameOfDish.equals(dish)) {
+                if (nameOfDish.replace("\\s", "").equalsIgnoreCase(dish)) {
                     dishIsAbsent = false;
                     System.out.println("Блюдо уже есть в меню.");
                 }
@@ -23,10 +23,7 @@ public class DinnerConstructor {
 
     // Метод проверяет наличие типа блюда в меню. С помощью проверки данным методом реализована логика в putDishToMenu()
     boolean checkType(String type) {
-        boolean typeIsExist = false;//
-        if (MENU.containsKey(type)) {
-            typeIsExist = true;
-        }
+        boolean typeIsExist = MENU.containsKey(type)? true : false;
         return typeIsExist;
     }
 
@@ -36,24 +33,29 @@ public class DinnerConstructor {
         MENU.put(typeOfDish, dishesNames);
     }
 
-    //Основной метод класса, добавляющий блюдо в меню в зависимости от его типа
+    /*Основной метод класса, добавляющий блюдо в меню в зависимости от его типа.
+    С удивлением обнаружил, что новый switch через лямбда-выражение позволяет обрабатывать булевы переменные.
+    Интуитивно раньше пытался подставлять их в switch, рад, что такая возможность наконец-то появилась,
+    хоть и понимаю, что на проектах с древним легаси это не будет работать. */
     void putDishToMenu(String typeOfDish, String nameOfDish) {
         if (typeOfDish.equals("Первое") || typeOfDish.equals("Суп")) {
             typeOfDish = "Суп";
         }
-        if (checkType(typeOfDish)) {
-            dishesNames = MENU.get(typeOfDish);
-            if (dishIsAbsent(nameOfDish)) {
+        boolean typeIsInMenu = checkType(typeOfDish) && dishIsAbsent(nameOfDish);
+
+        switch (typeIsInMenu) {
+
+            case true -> {
+                dishesNames = MENU.get(typeOfDish);
                 addingDish(typeOfDish, nameOfDish, dishesNames);
-                System.out.println(MENU);
             }
-        } else {
-            if (dishIsAbsent(nameOfDish)) {
-                ArrayList<String> dishesNames = new ArrayList<>();
+
+            case false -> {
+                dishesNames = new ArrayList<>();
                 addingDish(typeOfDish, nameOfDish, dishesNames);
-                System.out.println(MENU);
             }
         }
+        System.out.println(MENU);
     }
 }
 
