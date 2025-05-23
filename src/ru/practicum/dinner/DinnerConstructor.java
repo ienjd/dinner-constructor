@@ -23,8 +23,8 @@ public class DinnerConstructor {
 
     // Метод проверяет наличие типа блюда в меню. С помощью проверки данным методом реализована логика в putDishToMenu()
     boolean checkType(String type) {
-        boolean typeIsExist = MENU.containsKey(type)? true : false;
-        return typeIsExist;
+      boolean typeIsExist = MENU.containsKey(type)? true : false;
+      return typeIsExist;
     }
 
     // Простой метод для добавления блюда в соответствующий список.
@@ -42,18 +42,9 @@ public class DinnerConstructor {
             typeOfDish = "Суп";
         }
         boolean typeIsInMenu = checkType(typeOfDish) && dishIsAbsent(nameOfDish);
-
         switch (typeIsInMenu) {
-
-            case true -> {
-                dishesNames = MENU.get(typeOfDish);
-                addingDish(typeOfDish, nameOfDish, dishesNames);
-            }
-
-            case false -> {
-                dishesNames = new ArrayList<>();
-                addingDish(typeOfDish, nameOfDish, dishesNames);
-            }
+            case true -> addingDish(typeOfDish, nameOfDish, MENU.get(typeOfDish));
+            case false -> addingDish(typeOfDish, nameOfDish, new ArrayList<>());
         }
         System.out.println(MENU);
     }
