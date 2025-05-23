@@ -3,9 +3,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DinnerConstructor {
-
     public static final HashMap<String, ArrayList<String>> MENU = new HashMap<>();
-    ArrayList<String> dishesNames;
 
     // Метод проверяет имя блюда на наличие в меню. Если блюдо есть, добавить его второй раз не получится.
     boolean dishIsAbsent(String nameOfDish) {
@@ -23,8 +21,8 @@ public class DinnerConstructor {
 
     // Метод проверяет наличие типа блюда в меню. С помощью проверки данным методом реализована логика в putDishToMenu()
     boolean checkType(String type) {
-      boolean typeIsExist = MENU.containsKey(type)? true : false;
-      return typeIsExist;
+        boolean typeIsExist = MENU.containsKey(type) ? true : false;
+        return typeIsExist;
     }
 
     // Простой метод для добавления блюда в соответствующий список.
@@ -49,4 +47,5 @@ public class DinnerConstructor {
         System.out.println(MENU);
     }
 }
+
 
