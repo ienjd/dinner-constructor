@@ -1,9 +1,11 @@
 package ru.practicum.dinner;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class DinnerConstructor {
     public static final HashMap<String, ArrayList<String>> MENU = new HashMap<>();
+    Random random = new Random();
 
     // Метод проверяет имя блюда на наличие в меню. Если блюдо есть, добавить его второй раз не получится.
     boolean checkDishOnAbsent(String nameOfDish) {
@@ -44,7 +46,23 @@ public class DinnerConstructor {
             case true -> addingDish(typeOfDish, nameOfDish, MENU.get(typeOfDish));
             case false -> addingDish(typeOfDish, nameOfDish, new ArrayList<>());
         }
-        System.out.println(MENU);
+    }
+    // Метод для извлечения случайно позиции типа блюда
+    String returnDishFromUserType(String type){
+        return (MENU.get(type)).get(random.nextInt(MENU.get(type).size()));
+    }
+    // Метод для создания комбинаций блюд с использованием returnDishFromUserType
+    void createCombinations(int quantity, ArrayList<String> listOfTypes) {
+        int counter = 0;
+        String result = "";
+        while (counter < quantity) {
+            System.out.println("Комбинация № " + (counter + 1));
+            for (String type : listOfTypes) {
+                result = checkTypeOnExist(type) ? returnDishFromUserType(type) : "Такого типа блюд нет";
+                System.out.println((counter + 1 ) + ". " + result);
+            }
+            counter++;
+        }
     }
 }
 
